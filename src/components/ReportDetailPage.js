@@ -43,7 +43,7 @@ const ReportDetailPage = () => {
         if (!token) { handleLogout(); return; }
         const config = { headers: { 'x-auth-token': token } };
         try {
-            await axios.put(`http://localhost:5000/api/reports/${reportId}`, { status: newStatus }, config);
+            await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/reports/${reportId}`, { status: newStatus }, config);
             toast.success(`Report status updated to ${newStatus}`);
             navigate('/admin/dashboard');
         } catch (err) {
@@ -57,7 +57,7 @@ const ReportDetailPage = () => {
         if (!token) { handleLogout(); return; }
         const config = { headers: { 'x-auth-token': token } };
         try {
-            await axios.put(`http://localhost:5000/api/reports/${reportId}/action`, { actionTaken: actionText }, config);
+            await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/reports/${reportId}/action`, { actionTaken: actionText }, config);
             toast.success('Action notes saved successfully!');
         } catch (err) {
             console.error('Error saving action:', err);

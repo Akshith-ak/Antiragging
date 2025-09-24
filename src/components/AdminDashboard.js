@@ -38,7 +38,7 @@ const AdminDashboard = () => {
       if (!token) return;
       const config = { headers: { 'x-auth-token': token } };
       try {
-        const response = await axios.get('http://localhost:5000/api/reports', config);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/reports`, config);
         setReports(response.data);
       } catch (err) {
         if (err.response && err.response.status === 401) handleLogout();
