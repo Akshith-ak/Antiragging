@@ -1,38 +1,694 @@
-.App {
+/* --- Global Styles --- */
+/* src/App.css */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* --- Global Styles --- */
+body {
+  margin: 0;
+  /* ... rest of your css ... */
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+}
+
+h1, h2, h3, h4 {
+  margin-top: 0;
+}
+
+section {
+  padding: 60px 8%;
+}
+
+/* --- Header --- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 8%;
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  color: #0056b3;
+}
+
+.logo-icon {
+  margin-right: 10px;
+  font-size: 1.8rem;
+}
+
+.header-nav {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.nav-link:hover {
+  background-color: #f0f0f0;
+}
+
+.nav-link.active {
+  background-color: #e7f0ff;
+  color: #0056b3;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+ /* This is the corrected line */
+background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../public/hero-background.jpeg'); /* Place image in /public folder */
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero-content h2 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-primary {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.learn-more {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* --- Features Section --- */
+.features-section {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  background-color: #fff;
+  padding: 40px 8%;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.feature-card {
+  flex: 1;
+  padding: 20px;
+}
+
+.feature-card h3 {
+  font-size: 2.5rem;
+  color: #007bff;
+  margin-bottom: 5px;
+}
+
+.feature-card p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* --- Anti-Ragging Policy Section --- */
+.policy-section {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  background-color: #f9f9f9;
+}
+
+.policy-content {
+  flex: 1;
+}
+
+.policy-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+.policy-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 30px;
+}
+
+.policy-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.policy-icon-wrapper {
+  font-size: 1.5rem;
+  color: #fff;
+  border-radius: 8px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.policy-icon-wrapper.anonymity { background-color: #007bff; }
+.policy-icon-wrapper.response { background-color: #28a745; }
+.policy-icon-wrapper.investigation { background-color: #17a2b8; }
+
+
+.policy-list h4 {
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+}
+
+.policy-list p {
+  margin: 0;
+  color: #666;
+}
+
+.policy-image {
+  flex: 1;
+  max-width: 500px;
+}
+
+.policy-image img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Immediate Help Section --- */
+.help-section {
+  background-color: #f0f4ff;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.help-section h3 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.help-contacts {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+  flex-wrap: wrap;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.contact-item {
   display: flex;
   flex-direction: column;
+}
+
+.contact-label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.contact-label.emergency { color: #dc3545; }
+.contact-label.security { color: #007bff; }
+.contact-label.support { color: #28a745; }
+
+.contact-number {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* --- Report Incident Page --- */
+.report-incident-page {
+  background-color: #f0f2f5; /* Light background for the whole page */
+  min-height: 100vh;
+  padding-bottom: 50px; /* Space at the bottom */
+}
+
+.report-container {
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 40px;
+}
+
+.report-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.report-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.anonymous-tag {
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 8px;
+  background-color: #e6ffe6; /* Light green background */
+  color: #28a745; /* Green text */
+  padding: 10px 15px;
+  border-radius: 25px;
+  width: fit-content;
+  margin: 0 auto 40px auto;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
-.App-link {
-  color: #61dafb;
+.anonymous-icon {
+  font-size: 1.1rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.report-form .form-section {
+  margin-bottom: 30px;
+}
+
+.report-form .form-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.report-form .form-textarea,
+.report-form .form-input {
+  width: calc(100% - 24px); /* Account for padding */
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #555;
+  transition: border-color 0.2s;
+}
+
+.report-form .form-textarea:focus,
+.report-form .form-input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.report-form .form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.report-form .form-help-text {
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 8px;
+  margin-left: 5px;
+}
+
+.form-row {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+/* Severity Level */
+.severity-options {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap; /* Allows cards to wrap on smaller screens */
+}
+
+.severity-card {
+  flex: 1;
+  min-width: 150px; /* Ensures cards don't get too small */
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  background-color: #fefefe;
+}
+
+.severity-card:hover {
+  border-color: #a0a0a0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.severity-card.selected {
+  border-color: #007bff;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2);
+  background-color: #e7f0ff;
+}
+
+.severity-indicator {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+}
+
+.severity-indicator.low { background-color: #ffc107; }
+.severity-indicator.medium { background-color: #fd7e14; }
+.severity-indicator.high { background-color: #dc3545; }
+
+.severity-card h4 {
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.severity-card p {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0;
+}
+
+/* File Upload */
+.file-upload-box {
+  border: 2px dashed #a0a0a0;
+  border-radius: 10px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  background-color: #fafafa;
+}
+
+.file-upload-box:hover {
+  border-color: #007bff;
+  background-color: #e7f0ff;
+}
+
+.upload-icon-lg {
+  font-size: 3.5rem;
+  color: #a0a0a0;
+  margin-bottom: 15px;
+}
+
+.file-upload-box p {
+  margin: 5px 0;
+  color: #555;
+  font-weight: 500;
+}
+
+.file-upload-box .upload-info {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Privacy Notice */
+.privacy-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  background-color: #e0f2f7; /* Light blue background */
+  border: 1px solid #b3e0ed;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.privacy-icon {
+  font-size: 1.8rem;
+  color: #007bff;
+  flex-shrink: 0;
+}
+
+.privacy-notice h4 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.privacy-notice p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* Submit Button */
+.submit-report-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 15px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submit-report-btn:hover {
+  background-color: #0056b3;
+}
+
+.submission-info {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .report-container {
+    margin: 20px;
+    padding: 25px;
   }
-  to {
-    transform: rotate(360deg);
+  .report-title {
+    font-size: 2rem;
+  }
+  .form-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .severity-options {
+    flex-direction: column;
+  }
+  .severity-card {
+    min-width: unset;
+    width: 100%;
+  }
+}
+/* --- Admin Login Page --- */
+.admin-login-page {
+  background-color: #f7faff;
+  min-height: 100vh;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;
+}
+
+.login-box {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.07);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+}
+
+.login-box h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.login-box p {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.login-form .form-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-btn:hover {
+  background-color: #0056b3;
+}
+
+.demo-creds {
+  margin-top: 25px;
+  padding: 15px;
+  background-color: #f0f4ff;
+  border-radius: 6px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.demo-creds p {
+  margin: 5px 0;
+  color: #555;
+}
+/* All of your existing styles for header, hero, policy, etc., go here */
+/* ... (keep all the CSS you already have) ... */
+
+/* --- THIS IS THE NEW RESPONSIVE SECTION --- */
+@media (max-width: 768px) {
+  /* --- Global Changes --- */
+  section {
+    padding: 40px 5%; /* Reduce padding on smaller screens */
+  }
+
+  /* --- Header --- */
+  .header {
+    flex-direction: column; /* Stack the logo and nav vertically */
+    gap: 15px;
+    padding: 20px;
+  }
+
+  .header-nav {
+    flex-wrap: wrap; /* Allow nav links to wrap if needed */
+    justify-content: center;
+    gap: 10px;
+  }
+
+  /* --- Hero Section (Homepage) --- */
+  .hero-section {
+    padding: 60px 20px;
+  }
+  .hero-content h2 {
+    font-size: 2.2rem; /* Make the main title smaller */
+  }
+  .hero-actions {
+    flex-direction: column; /* Stack the buttons vertically */
+    gap: 15px;
+  }
+
+  /* --- Features Section (Homepage) --- */
+  .features-section {
+    flex-direction: column; /* Stack the 24/7, 100%, Swift cards */
+    gap: 20px;
+  }
+
+  /* --- Policy Section (Homepage) --- */
+  .policy-section {
+    flex-direction: column; /* Stack the image below the text */
+    gap: 30px;
+  }
+
+  /* --- Report Form --- */
+  .report-container {
+    margin: 20px;
+    padding: 25px;
+  }
+  .report-title {
+    font-size: 2rem;
+  }
+  .form-row {
+    flex-direction: column; /* Stack date and time inputs */
+    gap: 20px;
+  }
+  .severity-options {
+    flex-direction: column; /* Stack severity cards vertically */
+  }
+  
+  /* --- Login Page --- */
+  .login-container {
+    padding: 20px;
   }
 }

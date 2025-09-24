@@ -1,0 +1,157 @@
+/* --- Styles for Report Detail Page --- */
+.report-detail-page {
+  background-color: #f7faff;
+  min-height: 100vh;
+  padding: 40px;
+}
+.report-detail-page.not-found, .report-detail-page h2 {
+  text-align: center;
+  padding-top: 20px;
+}
+.detail-header {
+  margin-bottom: 20px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.back-btn {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+.detail-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.07);
+  padding: 30px 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.detail-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+.detail-card-header h2 {
+  margin: 0;
+}
+.detail-item {
+  margin-bottom: 25px;
+}
+.detail-item h4 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #666;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.detail-item p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* --- THIS IS THE FIX --- */
+.detail-item .description-text {
+  line-height: 1.6; /* Increases spacing between lines */
+  white-space: pre-wrap; /* Preserves intentional line breaks */
+  word-wrap: break-word; /* This is the key fix: it forces long words/strings to break */
+  font-family: inherit; /* Ensures it uses the same font as the rest of the page */
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.evidence-image, .evidence-video {
+  max-width: 100%;
+  max-height: 500px;
+  border-radius: 8px;
+  margin-top: 10px;
+  border: 1px solid #e0e0e0;
+  object-fit: contain;
+}
+.action-buttons {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 15px;
+}
+.action-buttons .action-btn {
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s;
+}
+.action-buttons .action-btn:hover {
+  opacity: 0.85;
+}
+.action-btn.pending {
+  background-color: #fd7e14;
+  color: #fff;
+}
+.action-btn.resolved {
+  background-color: #28a745;
+  color: #fff;
+}
+.action-section {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+.action-section p {
+    color: #666;
+    font-size: 0.95rem;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+.action-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #555;
+  resize: vertical;
+  margin-bottom: 15px;
+}
+.action-textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+.save-action-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+.save-action-btn:hover {
+  background-color: #0056b3;
+}
+
