@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Antiragging/static/css/main.a8304f75.css",
-    "main.js": "/Antiragging/static/js/main.ce5f65da.js",
+    "main.js": "/Antiragging/static/js/main.f155e108.js",
     "static/js/453.670e15c7.chunk.js": "/Antiragging/static/js/453.670e15c7.chunk.js",
     "static/media/graduates.jpeg": "/Antiragging/static/media/graduates.8fc1885c9f11a311cb05.jpeg",
     "index.html": "/Antiragging/index.html",
     "main.a8304f75.css.map": "/Antiragging/static/css/main.a8304f75.css.map",
-    "main.ce5f65da.js.map": "/Antiragging/static/js/main.ce5f65da.js.map",
+    "main.f155e108.js.map": "/Antiragging/static/js/main.f155e108.js.map",
     "453.670e15c7.chunk.js.map": "/Antiragging/static/js/453.670e15c7.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a8304f75.css",
-    "static/js/main.ce5f65da.js"
+    "static/js/main.f155e108.js"
   ]
 }
