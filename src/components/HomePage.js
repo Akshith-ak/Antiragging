@@ -1,4 +1,4 @@
-// src/components/HomePage.js
+// frontend/src/components/HomePage.js
 
 import React from 'react';
 import Header from './Header';

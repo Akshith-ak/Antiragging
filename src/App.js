@@ -2,8 +2,6 @@
 
 import React from 'react';
 import './App.css';
-// --- DO NOT IMPORT THE ROUTER HERE ---
-// Just import Routes and Route
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import HomePage from './components/HomePage';
@@ -15,7 +13,6 @@ import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
-    // --- The <Router> component has been REMOVED from this file ---
     <div className="App">
       <Toaster position="top-center" reverseOrder={false} />
       <Routes>
