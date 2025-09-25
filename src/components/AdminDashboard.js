@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-// 1. Corrected the import path for apiConfig
 import API_URL from './apiConfig';
+import toast from 'react-hot-toast';
 import { FaFileAlt, FaClock, FaCheckCircle, FaExclamationCircle, FaSignOutAlt, FaEye, FaShieldAlt, FaHome, FaUserCog, FaPaperclip } from 'react-icons/fa';
 import './AdminDashboard.css';
 
@@ -29,7 +29,6 @@ const AdminDashboard = () => {
                 const decodedToken = jwtDecode(token);
                 setAdminEmail(decodedToken.admin.email);
             } catch (error) {
-                console.error('Invalid token found:', error);
                 handleLogout();
                 return;
             }
@@ -41,6 +40,7 @@ const AdminDashboard = () => {
                 setReports(response.data);
             } catch (err) {
                 if (err.response && err.response.status === 401) {
+                    toast.error("Your session has expired. Please log in again.");
                     handleLogout();
                 }
             } finally {
@@ -50,7 +50,6 @@ const AdminDashboard = () => {
         fetchReports();
     }, [handleLogout]);
 
-    // 2. Added back the missing summaryCards definition
     const summaryCards = [
         { title: 'Total Reports', value: reports.length, icon: <FaFileAlt />, color: 'blue' },
         { title: 'Pending', value: reports.filter(r => r.status === 'Pending').length, icon: <FaClock />, color: 'orange' },
@@ -78,8 +77,8 @@ const AdminDashboard = () => {
                     </div>
                 </div>
                 {loading ? (<h2>Loading reports...</h2>) : (
-                    // 3. Added back the complete JSX for both summary cards and the table
                     <>
+                        {/* --- THIS IS THE MISSING SECTION THAT USES summaryCards --- */}
                         <div className="summary-cards">
                             {summaryCards.map((card, index) => (
                                 <div key={index} className="card">
@@ -94,24 +93,14 @@ const AdminDashboard = () => {
                         <div className="reports-table-container">
                             <h3>Recent Reports</h3>
                             <table className="reports-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Date</th>
-                                        <th>Severity</th>
-                                        <th>Location</th>
-                                        <th>Status</th>
-                                        <th>Evidence</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
+                                <thead><tr><th>ID</th><th>Date</th><th>Severity</th><th>Location</th><th>Status</th><th>Evidence</th><th>Actions</th></tr></thead>
                                 <tbody>
                                     {reports.map((report) => (
                                         <tr key={report._id}>
                                             <td>{report._id.slice(-8).toUpperCase()}</td>
                                             <td>{new Date(report.createdAt).toLocaleDateString()}</td>
                                             <td><span className={`severity-pill ${report.severity.toLowerCase()}`}>{report.severity}</span></td>
-                                            <td>{report.location || 'Not specified'}</td>
+                                            <td>{report.location || 'N/A'}</td>
                                             <td><span className={`status-pill ${report.status.toLowerCase()}`}>{report.status}</span></td>
                                             <td>{report.evidenceUrl ? (<a href={report.evidenceUrl} target="_blank" rel="noopener noreferrer" className="evidence-link"><FaPaperclip /> View</a>) : ('N/A')}</td>
                                             <td><Link to={`/report/${report._id}`} className="action-btn"><FaEye /></Link></td>
