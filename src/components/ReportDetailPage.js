@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+// frontend/src/components/ReportDetailPage.js
+
+import React, { useState, useEffect, useCallback } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import API_URL from './apiConfig';
 import { FaArrowLeft, FaExclamationTriangle, FaCalendarAlt, FaClock, FaMapMarkerAlt, FaCheckCircle, FaHourglassHalf, FaSave } from 'react-icons/fa';
 import './ReportDetailPage.css';
 
@@ -10,13 +13,14 @@ const ReportDetailPage = () => {
     const navigate = useNavigate();
     const [report, setReport] = useState(null);
     const [loading, setLoading] = useState(true);
-    // 1. New state to manage the text in the "Action Taken" input box
     const [actionText, setActionText] = useState('');
 
-    const handleLogout = () => {
+    // Using useCallback prevents this function from being recreated on every render,
+    // which is good practice for functions used in useEffect.
+    const handleLogout = useCallback(() => {
         localStorage.removeItem('token');
         navigate('/admin');
-    };
+    }, [navigate]);
 
     useEffect(() => {
         const fetchReport = async () => {
@@ -24,9 +28,8 @@ const ReportDetailPage = () => {
             if (!token) { handleLogout(); return; }
             const config = { headers: { 'x-auth-token': token } };
             try {
-                const response = await axios.get(`http://localhost:5000/api/reports/${reportId}`, config);
+                const response = await axios.get(`${API_URL}/api/reports/${reportId}`, config);
                 setReport(response.data);
-                // 2. When data is loaded, fill the text box with any previously saved notes
                 setActionText(response.data.actionTaken || '');
             } catch (err) {
                 if (err.response && err.response.status === 401) handleLogout();
@@ -35,53 +38,55 @@ const ReportDetailPage = () => {
             }
         };
         fetchReport();
-    }, [reportId, navigate]);
+    }, [reportId, handleLogout]);
 
-    // This function for changing status remains the same
     const handleStatusChange = async (newStatus) => {
         const token = localStorage.getItem('token');
         if (!token) { handleLogout(); return; }
         const config = { headers: { 'x-auth-token': token } };
         try {
-            await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/reports/${reportId}`, { status: newStatus }, config);
-            toast.success(`Report status updated to ${newStatus}`);
-            navigate('/admin/dashboard');
-        } catch (err) {
-            toast.error('Failed to update status.');
-        }
+            await axios.put(`${API_URL}/api/reports/${reportId}`, { status: newStatus }, config);
+            toast.success(`Status updated to ${newStatus}`);
+            navigate('/dashboard');
+        } catch (err) { toast.error('Failed to update status.'); }
     };
 
-    // 3. New function to handle saving the action notes
     const handleSaveAction = async () => {
         const token = localStorage.getItem('token');
         if (!token) { handleLogout(); return; }
         const config = { headers: { 'x-auth-token': token } };
         try {
-            await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/reports/${reportId}/action`, { actionTaken: actionText }, config);
-            toast.success('Action notes saved successfully!');
-        } catch (err) {
-            console.error('Error saving action:', err);
-            toast.error('Failed to save action notes.');
-        }
+            await axios.put(`${API_URL}/api/reports/${reportId}/action`, { actionTaken: actionText }, config);
+            toast.success('Action notes saved!');
+        } catch (err) { toast.error('Failed to save notes.'); }
     };
-    
-    if (loading) return <div className="report-detail-page"><h2>Loading...</h2></div>;
-    if (!report) return <div className="report-detail-page"><h2>Report Not Found</h2></div>;
 
+    // --- THIS IS THE MISSING renderEvidence FUNCTION ---
     const renderEvidence = () => {
-        if (!report.evidenceUrl) return null;
+        if (!report || !report.evidenceUrl) return null;
         const isVideo = report.evidenceUrl.match(/\.(mp4|mov|avi)$/) != null;
         if (isVideo) {
-            return <video controls className="evidence-video"><source src={report.evidenceUrl} /></video>;
+            return (<video controls className="evidence-video"><source src={report.evidenceUrl} type="video/mp4" />Your browser does not support video.</video>);
         } else {
-            return <a href={report.evidenceUrl} target="_blank" rel="noopener noreferrer"><img src={report.evidenceUrl} alt="Evidence" className="evidence-image" /></a>;
+            return (<a href={report.evidenceUrl} target="_blank" rel="noopener noreferrer"><img src={report.evidenceUrl} alt="Evidence" className="evidence-image" /></a>);
         }
     };
 
+    // --- THESE CHECKS PREVENT THE APP FROM CRASHING ---
+    // If the data is still loading, show a loading message.
+    if (loading) {
+        return <div className="report-detail-page"><h2>Loading Report...</h2></div>;
+    }
+    // If loading is finished but the report is still null (e.g., not found), show an error.
+    if (!report) {
+        return <div className="report-detail-page not-found"><h2>Report Not Found</h2></div>;
+    }
+
+    // --- The complete JSX for your page ---
     return (
         <div className="report-detail-page">
             <div className="detail-header">
-                <button onClick={() => navigate('/admin/dashboard')} className="back-btn"><FaArrowLeft /> Back to Dashboard</button>
+                <button onClick={() => navigate('/dashboard')} className="back-btn"><FaArrowLeft /> Back to Dashboard</button>
             </div>
             <div className="detail-card">
                 <div className="detail-card-header">
@@ -98,10 +103,9 @@ const ReportDetailPage = () => {
                 
                 {report.evidenceUrl && (<div className="detail-item"><h4>Evidence</h4>{renderEvidence()}</div>)}
                 
-                {/* --- 4. THIS IS THE NEW VISIBLE SECTION FOR THE ADMIN --- */}
                 <div className="action-section">
                     <h4>Action Taken</h4>
-                    <p>Detail the actions taken to address this report (e.g., meeting with students, disciplinary action, etc.).</p>
+                    <p>Detail the actions taken to address this report.</p>
                     <textarea
                         className="action-textarea"
                         placeholder="Type your notes here..."
