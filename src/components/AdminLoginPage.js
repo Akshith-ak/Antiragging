@@ -15,7 +15,7 @@ const AdminLoginPage = () => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            navigate('/dashboard');
+            navigate('/dashboard'); // If already logged in, go to dashboard
         }
     }, [navigate]);
 
@@ -26,7 +26,7 @@ const AdminLoginPage = () => {
             if (response.data.token) {
                 localStorage.setItem('token', response.data.token);
                 toast.success('Login Successful!');
-                navigate('/dashboard');
+                navigate('/dashboard'); // Navigate to the correct, simple path
             }
         } catch (err) {
             toast.error('Invalid credentials. Please try again.');
@@ -35,8 +35,25 @@ const AdminLoginPage = () => {
     
     return (
         <div className="admin-login-page">
-            <header className="header"><Link to="/" className="header-logo"><FaShieldAlt /><h1>Anti-Ragging Portal</h1></Link><nav className="header-nav"><NavLink to="/" className="nav-link"><FaHome /> Home</NavLink><NavLink to="/report" className="nav-link"><FaFileAlt /> Report Incident</NavLink><NavLink to="/admin" className="nav-link active"><FaUserCog /> Admin</NavLink></nav></header>
-            <div className="login-container"><div className="login-box"><h2>Admin Login</h2><p>Access the complaint management dashboard</p><form onSubmit={handleSubmit} className="login-form"><div className="form-group"><label>Email Address</label><input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required /></div><div className="form-group"><label>Password</label><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required /></div><button type="submit" className="login-btn">Sign In</button></form></div></div>
+            <header className="header">
+                <Link to="/" className="header-logo"><FaShieldAlt /><h1>Anti-Ragging Portal</h1></Link>
+                <nav className="header-nav">
+                    <NavLink to="/" className="nav-link"><FaHome /> Home</NavLink>
+                    <NavLink to="/report" className="nav-link"><FaFileAlt /> Report Incident</NavLink>
+                    <NavLink to="/admin" className="nav-link active"><FaUserCog /> Admin</NavLink>
+                </nav>
+            </header>
+            <div className="login-container">
+                <div className="login-box">
+                    <h2>Admin Login</h2>
+                    <p>Access the complaint management dashboard</p>
+                    <form onSubmit={handleSubmit} className="login-form">
+                        <div className="form-group"><label>Email Address</label><input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required /></div>
+                        <div className="form-group"><label>Password</label><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required /></div>
+                        <button type="submit" className="login-btn">Sign In</button>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 };
