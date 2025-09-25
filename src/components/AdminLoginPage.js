@@ -15,7 +15,7 @@ const AdminLoginPage = () => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            navigate('/dashboard'); // If already logged in, go to dashboard
+            navigate('/dashboard');
         }
     }, [navigate]);
 
@@ -26,7 +26,7 @@ const AdminLoginPage = () => {
             if (response.data.token) {
                 localStorage.setItem('token', response.data.token);
                 toast.success('Login Successful!');
-                navigate('/dashboard'); // Navigate to the correct, simple path
+                navigate('/dashboard');
             }
         } catch (err) {
             toast.error('Invalid credentials. Please try again.');
