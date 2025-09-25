@@ -32,8 +32,7 @@ const ReportIncidentPage = () => {
                 const uploadRes = await axios.post(`${API_URL}/api/upload`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
                 evidenceUrl = uploadRes.data.filePath;
             } catch (err) {
-                toast.error('File upload failed.');
-                setUploading(false); return;
+                toast.error('File upload failed.'); setUploading(false); return;
             }
             setUploading(false);
         }
