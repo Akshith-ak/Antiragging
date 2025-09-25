@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import API_URL from '../apiConfig';
+import API_URL from './apiConfig';
 import { FaShieldAlt, FaHome, FaFileAlt, FaUserCog } from 'react-icons/fa';
 
 const AdminLoginPage = () => {
