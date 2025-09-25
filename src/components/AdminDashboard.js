@@ -1,9 +1,8 @@
-// frontend/src/components/AdminDashboard.js
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+// 1. Corrected the import path for apiConfig
 import API_URL from './apiConfig';
 import { FaFileAlt, FaClock, FaCheckCircle, FaExclamationCircle, FaSignOutAlt, FaEye, FaShieldAlt, FaHome, FaUserCog, FaPaperclip } from 'react-icons/fa';
 import './AdminDashboard.css';
@@ -22,21 +21,36 @@ const AdminDashboard = () => {
     useEffect(() => {
         const fetchReports = async () => {
             const token = localStorage.getItem('token');
-            if (!token) { handleLogout(); return; }
+            if (!token) {
+                handleLogout();
+                return;
+            }
             try {
                 const decodedToken = jwtDecode(token);
                 setAdminEmail(decodedToken.admin.email);
-            } catch (error) { handleLogout(); return; }
-            const config = { headers: { 'x-auth-token': token } };
+            } catch (error) {
+                console.error('Invalid token found:', error);
+                handleLogout();
+                return;
+            }
+            const config = {
+                headers: { 'x-auth-token': token },
+            };
             try {
                 const response = await axios.get(`${API_URL}/api/reports`, config);
                 setReports(response.data);
-            } catch (err) { if (err.response && err.response.status === 401) handleLogout(); }
-            finally { setLoading(false); }
+            } catch (err) {
+                if (err.response && err.response.status === 401) {
+                    handleLogout();
+                }
+            } finally {
+                setLoading(false);
+            }
         };
         fetchReports();
     }, [handleLogout]);
 
+    // 2. Added back the missing summaryCards definition
     const summaryCards = [
         { title: 'Total Reports', value: reports.length, icon: <FaFileAlt />, color: 'blue' },
         { title: 'Pending', value: reports.filter(r => r.status === 'Pending').length, icon: <FaClock />, color: 'orange' },
@@ -64,6 +78,7 @@ const AdminDashboard = () => {
                     </div>
                 </div>
                 {loading ? (<h2>Loading reports...</h2>) : (
+                    // 3. Added back the complete JSX for both summary cards and the table
                     <>
                         <div className="summary-cards">
                             {summaryCards.map((card, index) => (
@@ -80,7 +95,15 @@ const AdminDashboard = () => {
                             <h3>Recent Reports</h3>
                             <table className="reports-table">
                                 <thead>
-                                    <tr><th>ID</th><th>Date</th><th>Severity</th><th>Location</th><th>Status</th><th>Evidence</th><th>Actions</th></tr>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Date</th>
+                                        <th>Severity</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Evidence</th>
+                                        <th>Actions</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     {reports.map((report) => (
@@ -104,3 +127,4 @@ const AdminDashboard = () => {
     );
 };
 export default AdminDashboard;
+
